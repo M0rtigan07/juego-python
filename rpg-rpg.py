@@ -1,5 +1,5 @@
 #!/bin/python3
-
+from random import shuffle
 # Replace RPG starter project with this code when new instructions are live
 
 def showInstructions():
@@ -26,30 +26,40 @@ def showStatus():
 #an inventory, which is initially empty
 inventory = []
 
+# items
+items = ["monster","key", "potion","espada","escudo"]
+
+shuffle(items)
+
 #a dictionary linking a room to other rooms
 rooms = {
 
             'Hall' : { 
                   'south' : 'Kitchen',
                   'east' : 'Dining Room',
-                  'item' : 'key'
+                  'item' :   items[0]
+                 
                 },
 
             'Kitchen' : {
                   'north' : 'Hall',
-                  'item' : 'monster'
+                  'item' : items[1]
+                  
                 },
             'Dining Room' : {
                 'west' : 'hall',
-                'south' : 'Garden'
+                'south' : 'Garden',
+                'item' : items[2]
+                
                 },
             'Garden' : {
               'north' : 'Dining Room',
-              'item' : 'potion'
+              'item' : items[3]
+              
             }
             
-
          }
+
 
 #start the player in the Hall
 currentRoom = 'Hall'
@@ -100,6 +110,11 @@ while True:
   if 'item' in rooms[currentRoom] and 'monster' in rooms[currentRoom] ['item']:
     print('A monster has got you... GAME OVER')
     break
+  
+# player loses if they enter a room with a monster
+  #if item == {'monster'} :
+  #  print('A monster has got you... GAME OVER')
+  #  break
   
 # player wins if they get to the garden with a key and a potion 
   if currentRoom == 'Garden' and 'key' in inventory and 'potion' in inventory:
